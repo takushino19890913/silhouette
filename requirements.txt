@@ -6,4 +6,3 @@ rembg==2.0.58
 scikit-build
 meson
 ninja
-cyton
