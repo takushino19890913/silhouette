@@ -1,4 +1,4 @@
-Flask==2.0.3
+Flask==3.0.3
 requests==2.26.0
 sendgrid==6.7.1
 Pillow==8.4.0
