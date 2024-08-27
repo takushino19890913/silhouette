@@ -5,5 +5,5 @@ Pillow==8.4.0
 rembg==2.0.58
 python-dotenv==0.19.2
 numpy
-./wheels/scipy-1.14.1-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
-./wheels/scikit_image-0.24.0-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
+scipy
+./wheels/scikit_image-0.24.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
