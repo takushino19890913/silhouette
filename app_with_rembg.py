@@ -9,9 +9,8 @@ from dotenv import load_dotenv
 # silhouette, rembg
 from PIL import Image, ImageDraw, ImageFont
 import io
+from rembg import remove
 import zipfile
-import cv2
-import numpy as np
 
 # .envファイルを読み込み
 load_dotenv()
@@ -54,38 +53,17 @@ def generate_image(prompt):
     return None
 
 def remove_background(image_data):
-    # バイトデータからOpenCV形式の画像に変換
-    nparr = np.frombuffer(image_data, np.uint8)
-    img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
-
-    # グレースケールに変換
-    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-
-    # 閾値処理
-    _, thresh = cv2.threshold(gray, 240, 255, cv2.THRESH_BINARY_INV)
-
-    # 輪郭を見つける
-    contours, _ = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-
-    # 最大の輪郭を見つける
-    max_contour = max(contours, key=cv2.contourArea)
-
-    # マスクを作成
-    mask = np.zeros(img.shape[:2], np.uint8)
-    cv2.drawContours(mask, [max_contour], 0, (255), -1)
-
-    # 背景を透明にする
-    transparent = cv2.cvtColor(img, cv2.COLOR_BGR2BGRA)
-    transparent[:, :, 3] = mask
-
-    # OpenCV形式からPIL形式に変換
-    pil_image = Image.fromarray(cv2.cvtColor(transparent, cv2.COLOR_BGRA2RGBA))
-
+    # 画像データをPIL Imageオブジェクトに変換
+    input_image = Image.open(io.BytesIO(image_data))
+    
+    # rembgを使用して背景を削除
+    output_image = remove(input_image)
+    
     # 結果の画像をバイトデータに変換
     img_byte_arr = io.BytesIO()
-    pil_image.save(img_byte_arr, format='PNG')
+    output_image.save(img_byte_arr, format='PNG')
     img_byte_arr = img_byte_arr.getvalue()
-
+    
     return img_byte_arr
 
 def make_quiz(image_data, hint, quiz):

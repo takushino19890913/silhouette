@@ -2,8 +2,6 @@ Flask==3.0.3
 requests
 sendgrid
 Pillow
-rembg
 python-dotenv
 numpy
-scipy
-./wheels/scikit_image-0.24.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
+opencv-python
