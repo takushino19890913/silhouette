@@ -143,6 +143,12 @@ def make_answer(image_data, answer):
     img_byte_arr = img_byte_arr.getvalue()
     return img_byte_arr
 
+def save_img(image_data, folder_path,image_name):
+    if not os.path.exists(f"./img/{folder_path}/"):
+        os.makedirs(f"./img/{folder_path}/")
+    with open(f"./img/{folder_path}/{image_name}.png", "wb") as file:
+        file.write(image_data)
+
 def send_email(image_data, image_name):
     # もし image_data が str 型で渡された場合、bytes 型に変換
     if isinstance(image_data, str):
