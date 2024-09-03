@@ -1,15 +1,20 @@
 {
     "version": 2,
     "builds": [
-      {
-        "src": "app.py",
-        "use": "@vercel/python"
-    }
+      { "src": "app.py", "use": "@vercel/python" },
+      { "src": "api/generate_image.py", "use": "@vercel/python" },
+      { "src": "api/remove_background.py", "use": "@vercel/python" },
+      { "src": "api/make_quiz.py", "use": "@vercel/python" },
+      { "src": "api/make_answer.py", "use": "@vercel/python" },
+      { "src": "api/send_email.py", "use": "@vercel/python" }
     ],
     "routes": [
-      {
-        "src": "/(.*)",
-        "dest": "app.py"
-      }
+      { "src": "/", "dest": "app.py" },
+      { "src": "/generate_quiz", "dest": "app.py" },
+      { "src": "/api/generate_image", "dest": "api/generate_image.py" },
+      { "src": "/api/remove_background", "dest": "api/remove_background.py" },
+      { "src": "/api/make_quiz", "dest": "api/make_quiz.py" },
+      { "src": "/api/make_answer", "dest": "api/make_answer.py" },
+      { "src": "/api/send_email", "dest": "api/send_email.py" }
     ]
   }
